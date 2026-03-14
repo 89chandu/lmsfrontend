@@ -689,6 +689,27 @@
     }
 }
 
+/* ── LOGIN RESPONSIVENESS ────────────────────────────── */
+.nav-login-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav-login-desktop {
+        display: none !important;
+    }
+
+    .nav-login-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 260px;
+        align-items: center;
+        margin-top: 10px;
+    }
+}
+
 /* ── RESPONSIVE: MOBILE (≤ 768px) ─────────────────────── */
 @media (max-width: 768px) {
     .navbar {

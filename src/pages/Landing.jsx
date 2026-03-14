@@ -75,20 +75,34 @@ export default function Landing() {
                     <a onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); document.getElementById('notices')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ cursor: 'pointer' }}>Notices</a>
                     <a onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ cursor: 'pointer' }}>Gallery</a>
                     <a onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ cursor: 'pointer' }}>Contact</a>
-                    <div className="login-dropdown-wrap" ref={dropdownRef}>
+
+                    {/* Desktop: dropdown button */}
+                    <div className="login-dropdown-wrap nav-login-desktop" ref={dropdownRef}>
                         <button className="btn btn-primary" onClick={() => setDropdownOpen((o) => !o)}>
                             Login Portal <ChevronDown size={14} strokeWidth={2.5} />
                         </button>
                         {dropdownOpen && (
                             <div className="login-dropdown">
-                                <button onClick={() => { setDropdownOpen(false); setMobileMenuOpen(false); navigate('/student/login'); }}>
+                                <button onClick={() => { setDropdownOpen(false); navigate('/student/login'); }}>
                                     <GraduationCap size={15} /> Student Login
                                 </button>
-                                <button onClick={() => { setDropdownOpen(false); setMobileMenuOpen(false); navigate('/teacher/login'); }}>
+                                <button onClick={() => { setDropdownOpen(false); navigate('/teacher/login'); }}>
                                     <Users size={15} /> Teacher Login
                                 </button>
                             </div>
                         )}
+                    </div>
+
+                    {/* Mobile: direct buttons (no nested dropdown) */}
+                    <div className="nav-login-mobile">
+                        <button className="btn btn-primary" style={{ width: '100%', maxWidth: 260, justifyContent: 'center' }}
+                            onClick={() => { setMobileMenuOpen(false); navigate('/student/login'); }}>
+                            <GraduationCap size={15} /> Student Login
+                        </button>
+                        <button className="btn btn-outline" style={{ width: '100%', maxWidth: 260, justifyContent: 'center' }}
+                            onClick={() => { setMobileMenuOpen(false); navigate('/teacher/login'); }}>
+                            <Users size={15} /> Teacher Login
+                        </button>
                     </div>
                 </div>
             </nav>

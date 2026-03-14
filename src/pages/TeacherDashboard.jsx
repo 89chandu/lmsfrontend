@@ -29,6 +29,7 @@ export default function TeacherDashboard() {
     const [pendingCount, setPendingCount] = useState(0);
     const [unreadCount, setUnreadCount] = useState(0);
     const [showGalleryUpload, setShowGalleryUpload] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [galleryToast, setGalleryToast] = useState('');
 
     const fetchPendingCount = useCallback(async () => {
@@ -66,8 +67,25 @@ export default function TeacherDashboard() {
                 />
             )}
             {galleryToast && <div className="td-toast success" style={{ zIndex: 700 }}>{galleryToast}</div>}
+            
+            {/* ── MOBILE HEADER ────────────────────────── */}
+            <header className="td-mobile-header">
+                <button className="td-hamburger" onClick={() => setIsSidebarOpen(true)}>
+                    <div className="td-hamburger-bar" />
+                    <div className="td-hamburger-bar" />
+                    <div className="td-hamburger-bar" />
+                </button>
+                <div className="td-mobile-brand">
+                    <GraduationCap size={20} color="var(--primary-light)" />
+                    <span>GDC Chhindwara</span>
+                </div>
+            </header>
+
+            {/* ── SIDEBAR BACKDROP ────────────────────── */}
+            {isSidebarOpen && <div className="td-sidebar-backdrop" onClick={() => setIsSidebarOpen(false)} />}
+
             {/* ── SIDEBAR ─────────────────────────── */}
-            <aside className="td-sidebar">
+            <aside className={`td-sidebar ${isSidebarOpen ? 'open' : ''}`}>
                 <div className="td-sidebar-brand">
                     <div className="td-sidebar-logo-wrap">
                         <GraduationCap size={22} strokeWidth={1.8} />
@@ -85,7 +103,7 @@ export default function TeacherDashboard() {
                             <button
                                 key={n.id}
                                 className={`td-nav-item ${active === n.id ? 'active' : ''}`}
-                                onClick={() => setActive(n.id)}
+                                onClick={() => { setActive(n.id); setIsSidebarOpen(false); }}
                             >
                                 <Icon size={17} strokeWidth={1.8} className="td-nav-icon-svg" />
                                 <span className="td-nav-label">{n.label}</span>
