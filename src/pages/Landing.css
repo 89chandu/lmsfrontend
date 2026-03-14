@@ -602,10 +602,47 @@
     color: var(--text-muted);
 }
 
-/* ── RESPONSIVE ────────────────────────────────────────── */
+/* ── HAMBURGER BUTTON ──────────────────────────────────── */
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 200;
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.nav-hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── RESPONSIVE: TABLET (≤ 900px) ─────────────────────── */
 @media (max-width: 900px) {
     .navbar {
         padding: 14px 24px;
+    }
+
+    .nav-links {
+        gap: 20px;
     }
 
     .hero {
@@ -620,6 +657,7 @@
 
     .hero-stats {
         justify-content: center;
+        flex-wrap: wrap;
     }
 
     .hero-cta {
@@ -644,6 +682,239 @@
 
     .footer-content {
         flex-direction: column;
+    }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* ── RESPONSIVE: MOBILE (≤ 768px) ─────────────────────── */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 20px;
+        position: fixed;
+    }
+
+    .nav-hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(10, 5, 25, 0.98);
+        backdrop-filter: blur(24px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 36px;
+        z-index: 150;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links > a {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .nav-college {
+        font-size: 0.9rem;
+    }
+
+    .nav-uni {
+        font-size: 0.68rem;
+    }
+
+    .notice-bar {
+        top: 56px;
+    }
+
+    .notice-label {
+        font-size: 0.65rem;
+        padding: 0 10px;
+    }
+
+    .notice-track span {
+        font-size: 0.78rem;
+    }
+
+    .hero {
+        padding: 130px 20px 50px;
+        text-align: center;
+        gap: 28px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.6rem, 7vw, 2.4rem);
+    }
+
+    .hero-sub {
+        font-size: 0.95rem;
+    }
+
+    .hero-badge {
+        font-size: 0.72rem;
+        padding: 5px 14px;
+    }
+
+    .hero-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto 28px;
+    }
+
+    .stat-box {
+        padding: 14px 10px;
+        min-width: unset;
+    }
+
+    .stat-box strong {
+        font-size: 1.2rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+
+    .login-dropdown {
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 240px;
+    }
+
+    .notices-section {
+        padding: 50px 16px 32px;
+    }
+
+    .notices-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-section {
+        padding: 50px 16px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .faculty-section {
+        padding: 50px 16px;
+    }
+
+    .faculty-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    .gallery-section {
+        padding: 50px 16px;
+    }
+
+    .gallery-grid {
+        columns: 2 140px;
+    }
+
+    .section-header {
+        margin-bottom: 36px;
+    }
+
+    .section-header h2 {
+        font-size: 1.55rem;
+    }
+
+    .section-header p {
+        font-size: 0.9rem;
+    }
+
+    .footer {
+        padding: 36px 16px 16px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer-links {
+        gap: 16px;
+    }
+}
+
+/* ── RESPONSIVE: SMALL PHONE (≤ 480px) ────────────────── */
+@media (max-width: 480px) {
+    .hero {
+        padding: 120px 16px 40px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.4rem, 8vw, 2rem);
+    }
+
+    .hero-sub {
+        font-size: 0.88rem;
+    }
+
+    .hero-stats {
+        max-width: 260px;
+    }
+
+    .stat-box strong {
+        font-size: 1.05rem;
+    }
+
+    .stat-box span {
+        font-size: 0.68rem;
+    }
+
+    .faculty-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
+        columns: 1;
+    }
+
+    .contact-card {
+        padding: 20px 16px;
+    }
+
+    .notice-item {
+        padding: 14px 16px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .nav-college {
+        font-size: 0.82rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.35rem;
     }
 }
 
@@ -936,12 +1207,4 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
-@media (max-width: 900px) {
-    .gallery-section {
-        padding: 60px 24px;
-    }
-
-    .gallery-grid {
-        columns: 2 160px;
-    }
-}
+/* gallery 900px handled in main responsive block above */

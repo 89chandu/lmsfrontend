@@ -35,6 +35,7 @@ export default function Landing() {
     const [gallery, setGallery] = useState([]);
     const [lightbox, setLightbox] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
     const dropdownRef = useRef(null);
 
@@ -63,20 +64,27 @@ export default function Landing() {
                         <span className="nav-uni">Chhindwara University</span>
                     </div>
                 </div>
-                <div className="nav-links">
-                    <a onClick={(e) => { e.preventDefault(); document.getElementById('notices')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ cursor: 'pointer' }}>Notices</a>
-                    <a onClick={(e) => { e.preventDefault(); document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ cursor: 'pointer' }}>Gallery</a>
-                    <a onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ cursor: 'pointer' }}>Contact</a>
+                <button
+                    className={`nav-hamburger${mobileMenuOpen ? ' open' : ''}`}
+                    onClick={() => setMobileMenuOpen(o => !o)}
+                    aria-label="Toggle menu"
+                >
+                    <span /><span /><span />
+                </button>
+                <div className={`nav-links${mobileMenuOpen ? ' open' : ''}`}>
+                    <a onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); document.getElementById('notices')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ cursor: 'pointer' }}>Notices</a>
+                    <a onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ cursor: 'pointer' }}>Gallery</a>
+                    <a onClick={(e) => { e.preventDefault(); setMobileMenuOpen(false); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} style={{ cursor: 'pointer' }}>Contact</a>
                     <div className="login-dropdown-wrap" ref={dropdownRef}>
                         <button className="btn btn-primary" onClick={() => setDropdownOpen((o) => !o)}>
                             Login Portal <ChevronDown size={14} strokeWidth={2.5} />
                         </button>
                         {dropdownOpen && (
                             <div className="login-dropdown">
-                                <button onClick={() => navigate('/student/login')}>
+                                <button onClick={() => { setDropdownOpen(false); setMobileMenuOpen(false); navigate('/student/login'); }}>
                                     <GraduationCap size={15} /> Student Login
                                 </button>
-                                <button onClick={() => navigate('/teacher/login')}>
+                                <button onClick={() => { setDropdownOpen(false); setMobileMenuOpen(false); navigate('/teacher/login'); }}>
                                     <Users size={15} /> Teacher Login
                                 </button>
                             </div>
